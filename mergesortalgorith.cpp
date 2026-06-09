@@ -1,0 +1,52 @@
+ #include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+using namespace std;
+
+ // MERGE SORT algorithm , T.C = O(nlogn), S.C = o(n)
+    void merge(int arr[],int si , int mid ,int ei){
+                vector<int>temp;
+                int i=si; 
+                int j=mid+1;
+                while(i<=mid && j<=ei){
+                  if(arr[i]<=arr[j]){
+                  temp.push_back(arr[i++]);
+                }else {
+                  temp.push_back(arr[j++]);
+                }
+                }
+                while (i<=mid){
+                  temp.push_back(arr[i++]);
+                }
+                while (j<=ei){
+                  temp.push_back(arr[j++]);
+                }
+           //temp vector --> original arr to be copied
+           for (int idx =si,x=0; idx<=ei;idx++){
+                   arr[idx] = temp[x++];
+           }
+         
+    }
+      void mergesort(int arr[],int si,int ei){
+     if (si>=ei){
+          return;// base case
+                }
+        int mid=si+(ei-si)/2; // divide the array
+        mergesort(arr,si,mid); // left array
+        mergesort(arr, mid+1,ei);
+        merge (arr,si,mid,ei);
+                              }
+                   // print array 
+          void printarr(int arr[], int n){
+            for(int i=0;i<n;i++){
+              cout<<arr[i]<<" "; 
+            }
+           }
+      
+      int main (){
+        int arr[]={6,3,7,5,2,4};
+        mergesort(arr, 0,5);
+        printarr(arr,6);
+      }
+  
